@@ -165,13 +165,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpKey: 32
+  interactionKey: 101
+  shootKey: 0
   speed: 5
   jumpForce: 10
   gravityModifier: 2
   isGrounded: 1
   gameOver: 0
   gameCamera: {fileID: 8707800005393929628}
-  interactionKey: 101
+  spawnBulletPos: {fileID: 0}
   interactionDistance: 6
 --- !u!114 &8707800005568603001
 MonoBehaviour:

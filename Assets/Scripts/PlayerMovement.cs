@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody playerRb;
+    private Rigidbody playerRb;    
+
+    [Header("Key settings")]
+    [SerializeField] private KeyCode jumpKey;
+    [SerializeField] private KeyCode interactionKey;
+    [SerializeField] private KeyCode shootKey;
 
     [Header("Player Controller Setup")]
-    [SerializeField] private KeyCode jumpKey;
     [SerializeField] float speed = 6;
     [SerializeField] float jumpForce;
     [SerializeField] float gravityModifier;
@@ -16,14 +20,12 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Interaction and aim")]
     [SerializeField] private Transform gameCamera;
-    [SerializeField] private KeyCode interactionKey;
+    [SerializeField] private Transform bulletPrefab;
+    [SerializeField] private Transform spawnBulletPos;
+    [SerializeField] private LayerMask aimMask = new LayerMask();
     [SerializeField] private float interactionDistance;
-
-
-    //[SerializeField] float smoothTurnTime = 0.1f;    
-     
-
-
+    [SerializeField] private Transform debugTransform;
+    
     private float horizontalInput;
     private float verticalInput;
 
@@ -39,31 +41,33 @@ public class PlayerMovement : MonoBehaviour
         PlayerInput();
         PlayerJump();
         Interactions();
+        Shoot();
+        
     }
 
     private void PlayerInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
-        Vector3 direction = new Vector3 (horizontalInput,0f, verticalInput).normalized;
+        Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
         if (direction.magnitude >= 0.1f)
-        {            
+        {
 
             Vector3 Movement = transform.TransformDirection(direction) * speed;
             playerRb.velocity = new Vector3(Movement.x, playerRb.velocity.y, Movement.z);
-                      
+
         }
 
     }
 
     private void PlayerJump()
     {
-        if(Input.GetKeyDown(jumpKey) && isGrounded)
+        if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
-        }        
+        }
     }
 
 
@@ -94,4 +98,44 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
+    private void Shoot()
+    {
+        Vector3 mousePosition = Vector3.zero;
+
+        Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimMask))
+        {
+            debugTransform.position = raycastHit.point;
+            mousePosition = raycastHit.point;
+        }
+        if (Input.GetKeyDown(shootKey))
+        {            
+            Vector3 aimDirection = (mousePosition - spawnBulletPos.position).normalized;
+            Instantiate(bulletPrefab, spawnBulletPos.position, Quaternion.LookRotation(aimDirection, Vector3.up));
+            //GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject();
+            //if (pooledProjectile != null)
+            //{
+            //    pooledProjectile.SetActive(true); // activate it
+            //    pooledProjectile.transform.position = spawnBulletPos.transform.position; // position it in front of a player
+            //    Quaternion.LookRotation(aimDirection, Vector3.up);
+            //}
+        }
+
+              
+    }
+
+    //private void MousePositionUpdate()
+    //{
+    //    Vector3 mousePosition = Vector3.zero;
+
+    //    Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);    
+    //    Ray ray= Camera.main.ScreenPointToRay(screenCenter);
+    //    if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimMask))
+    //    {
+    //        debugTransform.position = raycastHit.point;
+    //        mousePosition = raycastHit.point;
+    //    }
+    //}
 }
