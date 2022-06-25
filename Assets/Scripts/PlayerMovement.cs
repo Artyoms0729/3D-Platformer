@@ -124,18 +124,5 @@ public class PlayerMovement : MonoBehaviour
         }
 
               
-    }
-
-    //private void MousePositionUpdate()
-    //{
-    //    Vector3 mousePosition = Vector3.zero;
-
-    //    Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);    
-    //    Ray ray= Camera.main.ScreenPointToRay(screenCenter);
-    //    if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimMask))
-    //    {
-    //        debugTransform.position = raycastHit.point;
-    //        mousePosition = raycastHit.point;
-    //    }
-    //}
+    }   
 }
