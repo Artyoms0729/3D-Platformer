@@ -51,8 +51,9 @@ public class CountersScript : MonoBehaviour
         {
             t += Time.deltaTime;
             timeCount = TimeSpan.FromSeconds(t);
-            string timePlayingStr = "Time: " + timeCount.ToString("mm':'ss'.'ff");
-            timeText.text = timePlayingStr;
+            timeText.text = timeCount.ToString("mm':'ss'.'f");             
+            //string timePlayingStr = "Time: " + timeCount.ToString("mm':'ss'.'ff");
+            //timeText.text = timePlayingStr;
 
             yield return null;
 
