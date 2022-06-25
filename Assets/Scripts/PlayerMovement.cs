@@ -15,8 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 6;
     [SerializeField] float jumpForce;
     [SerializeField] float gravityModifier;
-    [SerializeField] bool isGrounded = true;
-    [SerializeField] bool gameOver = false;
+    [SerializeField] bool isGrounded = true;    
 
     [Header("Interaction and aim")]
     [SerializeField] private Transform gameCamera;
@@ -24,16 +23,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform spawnBulletPos;
     [SerializeField] private LayerMask aimMask = new LayerMask();
     [SerializeField] private float interactionDistance;
-    [SerializeField] private Transform debugTransform;
+    //[SerializeField] private Transform debugTransform;
     
     private float horizontalInput;
-    private float verticalInput;
+    private float verticalInput;    
+    
 
     private void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         Physics.gravity *= gravityModifier;
-        isGrounded = true;
+        isGrounded = true;        
     }
     // Update is called once per frame
     void Update()
@@ -66,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
+            CountersScript.jumpsMade++;
+            isGrounded = false;            
         }
     }
 
@@ -88,13 +89,15 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(interactionKey))
         {
             RaycastHit hit;
-            if (Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hit, interactionDistance)) ;
+
+            bool isButton = Physics.Raycast(gameCamera.transform.position, gameCamera.transform.forward, out hit, interactionDistance);
+            if (isButton)
             {
-                if (hit.transform.GetComponent<Elevator>())
+                if (hit.transform.CompareTag("Elevator"))//GetComponent<Elevator>())
                 {
                     hit.transform.GetComponent<Elevator>().Interact();
                 }
-            }
+            }            
 
         }
     }
@@ -107,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimMask))
         {
-            debugTransform.position = raycastHit.point;
+            //debugTransform.position = raycastHit.point;
             mousePosition = raycastHit.point;
         }
         if (Input.GetKeyDown(shootKey))

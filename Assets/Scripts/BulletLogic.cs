@@ -19,10 +19,12 @@ public class BulletLogic : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<TargetShield>() != null)
+        if(other.CompareTag("Target"))
         {
             //add points
-            Debug.Log("add 10 points");
+            Destroy(other.gameObject);
+            CountersScript.score++;
+            Debug.Log("add 1 point");
         }
         Destroy(gameObject);
         //gameObject.SetActive(false);

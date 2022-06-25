@@ -11,16 +11,13 @@ public class Platform : MonoBehaviour
     [SerializeField] private float floor2;
     [SerializeField] private float floor1;
     [SerializeField] private float floor0;
-    [SerializeField] private float elevatorSpeed;
-    
+    [SerializeField] private float elevatorSpeed;   
     //[SerializeField] private AnimationCurve eCurve;
 
     public int choosenFloor;
     private float targetFloor;
 
-
-    private Vector3 startPos;
-    //private Vector3 endPos;
+    private Vector3 startPos;  
     
 
     public static Platform Instance { get; private set; }  

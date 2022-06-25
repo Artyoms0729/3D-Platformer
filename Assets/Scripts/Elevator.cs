@@ -11,7 +11,6 @@ public class Elevator : MonoBehaviour
     public void Interact()
     {
         platform.choosenFloor = buttonPressed;
-        platform.GoToFloor();
-        Debug.Log("1st Floor!!");
+        platform.GoToFloor();        
     }
 }
