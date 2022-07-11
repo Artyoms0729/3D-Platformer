@@ -3,9 +3,10 @@
 It's a platformer that I made with use of standard rigidbody capsule and 3rd person player view.
 
 ## Table of contents
-  * Guidelines
-  * Mechanics
-  * Gameplay
+  * [Guidelines](https://github.com/Minal06/3D-Platformer/tree/main#guidelines)
+  * [Mechanics](https://github.com/Minal06/3D-Platformer/tree/main#mechanics)
+  * [Gameplay](https://github.com/Minal06/3D-Platformer/tree/main#gameplay)
+  * [Scripts](https://github.com/Minal06/3D-Platformer/tree/main#scripts)
 
 ### Guidelines
 It should be a game prototype with basic Unity engine physics. 
