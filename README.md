@@ -10,10 +10,15 @@ It's a platformer that I made with use of standard rigidbody capsule and 3rd per
 
 ### Guidelines
 It should be a game prototype with basic Unity engine physics. 
-It should have two towers with 4 levels each, between floors there should be an obstacles, stairs, and moving platforms.
-Player should move in all direction, could jump, and shoot some basic projectiles. 
-When the game starts, Player starts on the ground level in front of two towers. He/She have to choose one and use elevator inside to go on a choosen floor.
+
+It should have two towers with 4 levels each, between floors there should be obstacles, stairs, and moving platforms.
+
+Player should move in all directions, could jump, and shoot some basic projectiles. 
+
+When the game starts, Player starts on the ground level in front of two towers. Player have to choose one and use elevator inside to go on a choosen floor.
+
 After the obstacle course, in the end zone there is a shooting range for player.
+
 In-game UI shows how many times player jumped, how many target did he/she shot, and the timer.
 
 
